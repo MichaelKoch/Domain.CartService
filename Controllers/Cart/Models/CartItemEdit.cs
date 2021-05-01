@@ -5,20 +5,21 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Domain.CartService.Entities
+namespace Domain.CartService.Controllers.Cart.Models
 {
-    public class CartItemEntity : RestMongo.Models.FeedDocument
+    public class CartItemEdit
     {
         [IsQueryableAttribute()]
         [JsonPropertyName("CartId")]
-        public string CartId { get; set; }
+        public string CartId{get;set; }
          
         [IsQueryableAttribute()]
         [JsonPropertyName("ArticleId")]
-        public string ArticleId { get; set; }
+        public string  ArticleId { get; set; }
 
         [IsQueryableAttribute()]
         [JsonPropertyName("Quantity")]
         public decimal Quantity { get; set; }
+
     }
 }

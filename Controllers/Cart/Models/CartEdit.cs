@@ -7,14 +7,9 @@ using System.Threading.Tasks;
 
 namespace Domain.CartService.Controllers.Cart.Models
 {
-    public class Cart
+    public class CartEdit
     {
         
-
-        [IsQueryableAttribute()]
-        [JsonPropertyName("Id")] 
-        public string Id { get; set; }
-
         [IsQueryableAttribute()]
         [JsonPropertyName("ExternalId")]
         public string ExternalId { get; set; }
