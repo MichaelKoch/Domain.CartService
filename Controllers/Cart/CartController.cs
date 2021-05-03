@@ -22,7 +22,7 @@ namespace Domain.CartService.Controllers
         [HttpGet("{id}/items/{itemId}")]
         [SwaggerResponse(200)]
         [SwaggerResponse(404, "NOT FOUND", typeof(string))]
-        [SwaggerOperation("Get Cart item by ID", OperationId = "getCartItemByID")]
+        [SwaggerOperation("Get Cart item by ID", OperationId = "CartGetItemById")]
    
         public async virtual Task<ActionResult<Cart.Models.CartItem>> GetItem(string id, string itemId)
         {
@@ -37,8 +37,8 @@ namespace Domain.CartService.Controllers
         [HttpGet("{id}/items")]
         [SwaggerResponse(200)]
         [SwaggerResponse(404, "NOT FOUND", typeof(string))]
-        [SwaggerOperation("Get Cart items by ID", OperationId = "getAllCartItems")]
-        public async virtual Task<ActionResult<Cart.Models.CartItem>> GetItems(string id)
+        [SwaggerOperation("Get Cart items by ID", OperationId = "CartGetAllItems")]
+        public async virtual Task<ActionResult<Cart.Models.CartItem>> GetAllItems(string id)
         {
             if (await _cartRepo.FindByIdAsync(id) == null)
             {
@@ -50,14 +50,14 @@ namespace Domain.CartService.Controllers
         [HttpPost("{id}/items/")]
         [SwaggerResponse(204)]
         [SwaggerResponse(409, "CONFLICT")]
-        [SwaggerOperation("update cart item by id", OperationId = "createCartItem")]
-        public async virtual Task<ActionResult<Cart.Models.CartItem>> PostItem(string id, [FromBody] Cart.Models.CartItemEdit value)
+        [SwaggerOperation("update cart item by id", OperationId = "CartCreateItem")]
+        public async virtual Task<ActionResult<Cart.Models.CartItem>> CreateItem(string id, [FromBody] Cart.Models.CartItemEdit value)
         {
             if (await _cartRepo.FindByIdAsync(id) == null)
             {
                 return NotFound();
             }
-            return await _ctrl.Post(value);
+            return await _ctrl.Create(value);
         }
 
 
@@ -65,20 +65,20 @@ namespace Domain.CartService.Controllers
         [HttpPut("{id}/items/{itemId}")]
         [SwaggerResponse(204,"NO CONTENT")]
         [SwaggerResponse(404, "NOT FOUND")]
-        [SwaggerOperation("update cart item by id",OperationId ="updateCartItemByID")]
-        public async virtual Task<ActionResult<string>> PutItem(string id, string itemId,[FromBody] Cart.Models.CartItemEdit value)
+        [SwaggerOperation("update cart item by id",OperationId ="CartUpdateItemById")]
+        public async virtual Task<ActionResult<string>> UpdateItem(string id, string itemId,[FromBody] Cart.Models.CartItemEdit value)
         {
             if(await _cartRepo.FindByIdAsync(id) == null)
             {
                 return NotFound();
             }
-            return await _ctrl.Put(itemId, value);
+            return await _ctrl.Update(itemId, value);
         }
 
         [HttpDelete("{id}/items/{itemId}")]
         [SwaggerResponse(200)]
         [SwaggerResponse(404, "CONFLICT")]
-        [SwaggerOperation("delete cart item by id", OperationId = "deleteCartItemByID")]
+        [SwaggerOperation("delete cart item by id", OperationId = "CartDeleteItemById")]
         public async virtual Task< ActionResult<Cart.Models.CartItem>> DeleteItem(string id,string itemId)
         {
             if (await _cartRepo.FindByIdAsync(id) == null)
