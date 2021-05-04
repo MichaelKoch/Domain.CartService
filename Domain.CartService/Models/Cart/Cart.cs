@@ -5,15 +5,21 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Domain.CartService.Controllers.Cart.Models
+namespace Domain.CartService.Models
 {
-    public class CartEdit
+    public class Cart
     {
         
-        [IsQueryableAttribute()]
+
+        [IsQueryable()]
+        [JsonPropertyName("Id")]         
+        public string Id { get; set; }
+
+        [IsQueryable()]
         [JsonPropertyName("ExternalId")]
         public string ExternalId { get; set; }
-        [IsQueryableAttribute()]
+
+        [IsQueryable()]
         [JsonPropertyName("CustomerId")] 
         public string CustomerId { get; set; }
 

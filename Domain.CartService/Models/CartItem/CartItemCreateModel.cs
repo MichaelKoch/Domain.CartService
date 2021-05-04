@@ -5,18 +5,18 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Domain.CartService.Controllers.Cart.Models
+namespace Domain.CartService.Models
 {
-    public class CartItemEdit
+    public class CartItemCreateModel
     {
- 
-        [IsQueryableAttribute()]
-        [JsonPropertyName("ArticleId")]
-        public string  ArticleId { get; set; }
 
-        [IsQueryableAttribute()]
+     
+        [JsonPropertyName("ArticleId")]
+        public string ArticleId { get; set; }
+
+
         [JsonPropertyName("Quantity")]
-        public decimal Quantity { get; set; }
+        public int Quantity { get; set; }
 
     }
 }
