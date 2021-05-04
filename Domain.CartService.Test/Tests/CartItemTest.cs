@@ -16,41 +16,44 @@ namespace Domain.CartService.Test.Tests
         {
             var context = Guid.NewGuid().ToString();
             var cart = new CartCreateModel();
-            
+            throw new NotImplementedException();
         }
+        
         [TestMethod]
         public void Read()
         {
-
+            throw new NotImplementedException();
         }
 
         [TestMethod]
         public void ReadNotFound()
         {
-
+            throw new NotImplementedException();
         }
 
         [TestMethod]
         public void Update()
         {
-
+            throw new NotImplementedException();
         }
+        
         [TestMethod]
         public void UpdateNotFound()
         {
-
+            throw new NotImplementedException();
         }
-
 
         [TestMethod]
         public void Delete()
         {
-
+            throw new NotImplementedException();
         }
+        
         [TestMethod]
         public void DeleteNotFound()
         {
 
+            throw new NotImplementedException();
         }
     }
 }
