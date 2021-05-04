@@ -9,10 +9,7 @@ namespace Domain.CartService.Controllers.Cart.Models
 {
     public class CartItemEdit
     {
-        [IsQueryableAttribute()]
-        [JsonPropertyName("CartId")]
-        public string CartId{get;set; }
-         
+ 
         [IsQueryableAttribute()]
         [JsonPropertyName("ArticleId")]
         public string  ArticleId { get; set; }

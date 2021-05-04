@@ -4,14 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using RestMongo;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Domain.CartService
 {
@@ -45,6 +43,7 @@ namespace Domain.CartService
                 app.UseSwaggerUI(c =>
                 {
                     c.DisplayOperationId();
+                    c.DefaultModelRendering(ModelRendering.Model);
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Domain.CartService v1");
                 }); 
                    

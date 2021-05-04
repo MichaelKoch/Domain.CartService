@@ -24,7 +24,7 @@ namespace Domain.CartService.Controllers.Cart.Models
 
         [IsQueryableAttribute()]
         [JsonPropertyName("Quantity")]
-        public decimal Quantity { get; set; }
+        public Int32 Quantity { get; set; }
 
     }
 }

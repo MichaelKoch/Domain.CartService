@@ -13,6 +13,7 @@ namespace Domain.CartService.Controllers.Cart.Models
 
         [IsQueryableAttribute()]
         [JsonPropertyName("Id")] 
+        
         public string Id { get; set; }
 
         [IsQueryableAttribute()]
