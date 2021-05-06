@@ -18,6 +18,7 @@ namespace Domain.CartService.Controllers
                 waitfor.Add(loadItems(value.Id).ContinueWith(data => value.Items = data.Result));
             }
             Task.WaitAll(waitfor.ToArray());
+
             return value;
         }
 

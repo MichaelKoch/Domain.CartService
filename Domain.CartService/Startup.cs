@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RestMongo;
+using RestMongo.Interfaces;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Domain.CartService
@@ -22,9 +23,11 @@ namespace Domain.CartService
 
         public IConfiguration Configuration { get; }
 
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddRestMongo<CartService.Startup>(Configuration);
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -46,15 +49,11 @@ namespace Domain.CartService
                     c.DefaultModelRendering(ModelRendering.Model);
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Domain.CartService v1");
                 }); 
-                   
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
