@@ -1,10 +1,6 @@
 ﻿using Domain.CartService.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.CartService.Test.Tests
 {
@@ -18,7 +14,7 @@ namespace Domain.CartService.Test.Tests
             var cart = new CartCreateModel();
             throw new NotImplementedException();
         }
-        
+
         [TestMethod]
         public void Read()
         {
@@ -36,7 +32,7 @@ namespace Domain.CartService.Test.Tests
         {
             throw new NotImplementedException();
         }
-        
+
         [TestMethod]
         public void UpdateNotFound()
         {
@@ -48,7 +44,7 @@ namespace Domain.CartService.Test.Tests
         {
             throw new NotImplementedException();
         }
-        
+
         [TestMethod]
         public void DeleteNotFound()
         {

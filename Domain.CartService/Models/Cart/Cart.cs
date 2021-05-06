@@ -1,16 +1,13 @@
 ﻿using RestMongo.Attributes;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Domain.CartService.Models
 {
     public class Cart
     {
-        
+
 
         [IsQueryable()]
         [JsonPropertyName("Id")]
@@ -26,7 +23,7 @@ namespace Domain.CartService.Models
         [Required]
         public string CustomerId { get; set; }
 
-        [JsonPropertyName("Name")] 
+        [JsonPropertyName("Name")]
         public IList<CartItem> Items;
     }
 }

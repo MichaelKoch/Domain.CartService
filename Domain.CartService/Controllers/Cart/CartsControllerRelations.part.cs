@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Domain.CartService.Controllers
 {
-    public partial class CartsController 
+    public partial class CartsController
     {
 
 

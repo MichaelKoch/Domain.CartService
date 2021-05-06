@@ -5,10 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RestMongo;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.CartService.Test.Tests
 {
@@ -16,10 +12,10 @@ namespace Domain.CartService.Test.Tests
     public class CartTest
     {
         [TestMethod]
-        public  void Create()
+        public void Create()
         {
             var context = Guid.NewGuid().ToString();
-            var cart = new CartCreateModel() { ExternalId = context,CustomerId="CUSOMTERID" };
+            var cart = new CartCreateModel() { ExternalId = context, CustomerId = "CUSOMTERID" };
             var repo = DataHelper.GetRepository<CartEntity>();
             var ctrl = new CartsController(repo, null);
             var result = ctrl.Create(cart).Result;
@@ -30,13 +26,13 @@ namespace Domain.CartService.Test.Tests
             DataHelper.Cleanup(repo, created.Id);
         }
         [TestMethod]
-        public  void Read()
+        public void Read()
         {
             var context = Guid.NewGuid().ToString();
             var cart = new CartCreateModel() { ExternalId = context };
             var repo = DataHelper.GetRepository<CartEntity>();
             var ctrl = new CartsController(repo, null);
-            var result =  ctrl.Create(cart).Result;
+            var result = ctrl.Create(cart).Result;
             var created = (ctrl.Get(result.Value.Id).Result).Value;
             Assert.IsNotNull(created);
             Assert.IsTrue(created.ExternalId == context);
@@ -44,12 +40,12 @@ namespace Domain.CartService.Test.Tests
         }
 
         [TestMethod]
-        public  void ReadNotFound()
+        public void ReadNotFound()
         {
             var repo = DataHelper.GetRepository<CartEntity>();
             var ctrl = new CartsController(repo, null);
             var result = (ctrl.Get(Guid.NewGuid().ToString()).Result).Result;
-            Assert.IsInstanceOfType(result,typeof(NotFoundResult));
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
 
         [TestMethod]
@@ -64,7 +60,7 @@ namespace Domain.CartService.Test.Tests
             Assert.IsNotNull(created);
             Assert.IsTrue(created.ExternalId == context);
             created.CustomerId = "TESTCUSTOMER";
-            var  updateResult = ctrl.Update(created.Id, created.Transform<CartUpdateModel>()).Result;
+            var updateResult = ctrl.Update(created.Id, created.Transform<CartUpdateModel>()).Result;
             var updated = (ctrl.Get(result.Value.Id).Result).Value;
             Assert.IsTrue(updated.CustomerId == "TESTCUSTOMER");
             DataHelper.Cleanup(repo, created.Id);
@@ -75,7 +71,7 @@ namespace Domain.CartService.Test.Tests
         {
             var repo = DataHelper.GetRepository<CartEntity>();
             var ctrl = new CartsController(repo, null);
-            var result = ctrl.Update(Guid.NewGuid().ToString(),new CartUpdateModel()).Result;
+            var result = ctrl.Update(Guid.NewGuid().ToString(), new CartUpdateModel()).Result;
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
 
@@ -92,7 +88,7 @@ namespace Domain.CartService.Test.Tests
             Assert.IsNotNull(created);
             ctrl.Delete(created.Id).Wait();
             var notThere = (ctrl.Get(result.Value.Id).Result).Result;
-                Assert.IsInstanceOfType(notThere, typeof(NotFoundResult));
+            Assert.IsInstanceOfType(notThere, typeof(NotFoundResult));
             DataHelper.Cleanup(repo, created.Id);
         }
         [TestMethod]

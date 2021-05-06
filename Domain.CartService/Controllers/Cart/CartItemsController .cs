@@ -1,28 +1,32 @@
-﻿using Domain.CartService.Entities;
-using Domain.CartService.Models;
-using Microsoft.AspNetCore.Mvc;
-using RestMongo.Interfaces;
+﻿//using Domain.CartService.Entities;
+//using Domain.CartService.Models;
+//using Microsoft.AspNetCore.Mvc;
+//using RestMongo.Interfaces;
+//using System.Threading.Tasks;
 
-namespace Domain.CartService.Controllers
-{
+//namespace Domain.CartService.Controllers
+//{
 
-    /// <summary>
-    /// 
-    /// </summary>
-    [Route("/carts")]
-    [ApiController]
-   
-    public partial class CartItemsController : RestMongo.Controllers.ReadController<CartItemEntity,CartItem>
-    {
-       
+//    /// <summary>
+//    /// 
+//    /// </summary>
+//    [Route("/cartitems")]
+//    [ApiController]
 
-        private IRepository<CartItemEntity> _cartItemRepo;
+//    public partial class CartItemsController : RestMongo.Controllers.ReadWriteController<CartItemEntity,CartItem,CartItemCreateModel,CartItemUpdateModel>
+//    {
 
-      
-        public CartItemsController(IRepository<CartItemEntity> cartItemRepo) : base(cartItemRepo)
-        {
-         
-            this._cartItemRepo = cartItemRepo;
-        }   
-    }
-}
+
+//        private IRepository<CartEntity> _cartRepo;
+//        private IRepository<CartItemEntity> _cartItemRepo;
+
+
+
+//        public CartItemsController( IRepository<CartEntity> cartRepo, IRepository<CartItemEntity> cartItemRepo
+//            ) : base(cartItemRepo)
+//        {
+//            this._cartRepo = cartRepo;
+//            this._cartItemRepo = cartItemRepo;
+//        }   
+//    }
+//}

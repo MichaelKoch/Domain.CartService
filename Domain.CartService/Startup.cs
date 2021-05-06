@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RestMongo;
-using RestMongo.Interfaces;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Domain.CartService
@@ -48,7 +43,7 @@ namespace Domain.CartService
                     c.DisplayOperationId();
                     c.DefaultModelRendering(ModelRendering.Model);
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Domain.CartService v1");
-                }); 
+                });
             }
 
             app.UseHttpsRedirection();

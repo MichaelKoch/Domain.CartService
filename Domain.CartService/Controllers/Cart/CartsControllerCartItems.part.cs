@@ -2,7 +2,6 @@
 using Domain.CartService.Models;
 using Microsoft.AspNetCore.Mvc;
 using RestMongo;
-using RestMongo.Models;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,8 +12,7 @@ namespace Domain.CartService.Controllers
     {
         [HttpGet("{id}/items/{itemId}")]
         [SwaggerResponse(200)]
-        [SwaggerResponse(404, "NOT FOUND", typeof(string))]
- 
+        [SwaggerResponse(404, "CONFLICT", typeof(ProblemDetails))]
         [Consumes("application/json")]
         [Produces("application/json")]
         [SwaggerOperation("Get Cart item by ID", OperationId = "CartGetItemById")]
@@ -58,7 +56,7 @@ namespace Domain.CartService.Controllers
                 return NotFound();
             }
             var itemEntity = value.Transform<CartItemEntity>();
-                itemEntity.CartId = id;
+            itemEntity.CartId = id;
             await _cartItemRepo.InsertOneAsync(itemEntity);
             return Ok(itemEntity.Transform<CartItem>());
         }
@@ -85,8 +83,6 @@ namespace Domain.CartService.Controllers
 
 
 
-
-
         [HttpDelete("{id}/items/{itemId}")]
         [SwaggerResponse(204)]
         [SwaggerResponse(404, "CONFLICT", typeof(ProblemDetails))]
@@ -101,12 +97,7 @@ namespace Domain.CartService.Controllers
             {
                 return NotFound();
             }
-            //HINT : 204 --> OK ... whats about soft delete  ?? 
-            //TODO : Need discussion :
-            //if (await _cartItemRepo.FindByIdAsync(itemId) == null)
-            //{
-            //    return NotFound();
-            //}
+
             await _cartItemRepo.DeleteByIdAsync(itemId);
             return NoContent();
         }

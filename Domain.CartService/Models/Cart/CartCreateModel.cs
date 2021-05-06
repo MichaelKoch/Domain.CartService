@@ -1,18 +1,13 @@
-﻿using RestMongo.Attributes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Domain.CartService.Models
-{ 
+{
     public class CartCreateModel
     {
-        
 
-     
+
+
         [JsonPropertyName("ExternalId")]
         public string ExternalId { get; set; }
 
