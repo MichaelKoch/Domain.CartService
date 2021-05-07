@@ -2,6 +2,7 @@
 using Domain.CartService.Models;
 using Microsoft.AspNetCore.Mvc;
 using RestMongo.Interfaces;
+using System.Threading.Tasks;
 
 namespace Domain.CartService.Controllers
 {
@@ -17,6 +18,10 @@ namespace Domain.CartService.Controllers
         private IRepository<CartEntity> _cartRepo;
         private IRepository<CartItemEntity> _cartItemRepo;
 
+        public override Task<ActionResult<Cart>> Get(string id, [FromQuery(Name = "$expand")] string expand = "")
+        {
+            return base.Get(id, expand);
+        }
 
         public CartsController(IRepository<CartEntity> cartRepo, IRepository<CartItemEntity> cartItemRepo) : base(cartRepo)
         {

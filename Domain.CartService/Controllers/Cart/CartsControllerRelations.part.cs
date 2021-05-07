@@ -1,6 +1,7 @@
 ﻿using Domain.CartService.Models;
 using RestMongo;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Domain.CartService.Controllers
@@ -9,24 +10,38 @@ namespace Domain.CartService.Controllers
     {
 
 
-        protected async override Task<Cart> LoadRelations(Cart value, IList<string> relationNames)
+      
+
+        protected async override Task<IList<Cart>> LoadRelations(IList<Cart> values, IList<string> relations)
         {
             List<Task> waitfor = new List<Task>();
-            if (relationNames.Contains("Items"))
+            if (relations.Contains("Items"))
             {
-                relationNames.Remove("Items");
-                waitfor.Add(loadItems(value.Id).ContinueWith(data => value.Items = data.Result));
+                relations.Remove("Items");
+                waitfor.Add(loadItems(values));
             }
             Task.WaitAll(waitfor.ToArray());
-
-            return value;
+            if (relations.Count > 0)
+            {
+                throw new KeyNotFoundException();
+            }
+            return values;
         }
 
+       
 
-        protected async Task<List<CartItem>> loadItems(string cartID)
+        private async Task<bool> loadItems(IList<Cart> values)
         {
-            var entities = await Task.Run(() => { return _cartItemRepo.FilterBy(c => c.CartId == cartID); });
-            return entities.Transform<List<CartItem>>();
+            var cartIds  = values.Select(c => c.Id).ToList();
+            var items = await _cartItemRepo.FilterByAsync(c => cartIds.Contains(c.CartId));
+           
+            foreach (var cart in values)
+            {
+                cart.Items = items.Where(c=>c.CartId== cart.Id).ToList().Transform<List<CartItemCreateModel>>();
+            }
+            return true;
         }
+
+       
     }
 }

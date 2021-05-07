@@ -1,6 +1,7 @@
 ﻿using RestMongo.Attributes;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
 namespace Domain.CartService.Models
@@ -23,7 +24,9 @@ namespace Domain.CartService.Models
         [Required]
         public string CustomerId { get; set; }
 
-        [JsonPropertyName("Name")]
-        public IList<CartItem> Items;
+
+   
+        [JsonPropertyName("Items")]
+        public List<CartItemCreateModel> Items { get; set; }
     }
 }
